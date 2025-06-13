@@ -1,0 +1,338 @@
+:root {
+    --abyss-black: #121212;
+    --slate-gray: #1E1E1E;
+    --cyber-blue: #00A8FF;
+    --success-green: #28A745;
+    --cloud-white: #EAEAEA;
+    --mist-gray: #888888;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: var(--abyss-black);
+    color: var(--cloud-white);
+}
+
+.explanation {
+    background-color: var(--slate-gray);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.explanation h2 {
+    color: var(--cyber-blue);
+    margin-top: 0;
+}
+
+.explanation p {
+    color: var(--mist-gray);
+    margin-bottom: 0;
+}
+
+header {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header p {
+    color: var(--mist-gray);
+}
+
+main {
+    padding: 2rem;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.tool-card {
+    background-color: var(--slate-gray);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #2a2a2a;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--cyber-blue);
+}
+
+.tool-card .icon {
+    font-size: 2.5rem;
+    color: var(--cyber-blue);
+    margin-bottom: 1rem;
+}
+
+.tool-card h2 {
+    margin-top: 0;
+    color: var(--cloud-white);
+}
+
+.tool-card p {
+    color: var(--mist-gray);
+    transition: color 0.3s ease;
+}
+
+.tool-card:hover p {
+    color: var(--cyber-blue);
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    color: var(--mist-gray);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.7);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: var(--slate-gray);
+    margin: 5% auto;
+    padding: 2rem;
+    border: 1px solid #2a2a2a;
+    width: 90%;
+    max-width: 1000px;
+    border-radius: 8px;
+    position: relative;
+    animation: slideIn 0.3s;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.tool-instructions {
+    border-left: 1px solid #2a2a2a;
+    padding-left: 2rem;
+    font-size: 0.9rem;
+}
+
+.tool-instructions h3, .tool-instructions h4 {
+    color: var(--cyber-blue);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.tool-instructions h3 i, .tool-instructions h4 i {
+    margin-right: 0.5rem;
+}
+
+.tool-instructions ol, .tool-instructions ul {
+    padding-left: 1.5rem;
+    color: var(--mist-gray);
+}
+
+.tool-instructions ul {
+    list-style-type: circle;
+}
+
+.close-button {
+    color: var(--mist-gray);
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--cloud-white);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideIn {
+    from {transform: translateY(-50px);}
+    to {transform: translateY(0);}
+}
+
+/* Form Styles */
+.tool-form {
+    padding: 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: bold;
+    color: var(--mist-gray);
+}
+
+.path-note {
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.form-group-inline {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+.file-type-group {
+    flex-grow: 1;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    margin-bottom: .75rem; /* Align with input padding */
+}
+
+.input-group {
+    display: flex;
+}
+
+.form-group input[type="text"],
+.form-group select {
+    flex-grow: 1;
+    padding: .75rem;
+    border: 1px solid #333;
+    border-radius: 4px 0 0 4px;
+    background-color: var(--abyss-black);
+    color: var(--cloud-white);
+    border-right: none;
+}
+
+.browse-btn, button[type="submit"], #dir-browser-select {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(145deg, #2a2a2a, #1e1e1e);
+    box-shadow: 5px 5px 10px #0d0d0d, -5px -5px 10px #2b2b2b;
+    color: var(--cloud-white);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.browse-btn:hover, button[type="submit"]:hover, #dir-browser-select:hover {
+    background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+    box-shadow: 2px 2px 5px #0d0d0d, -2px -2px 5px #2b2b2b;
+}
+
+.browse-btn:active, button[type="submit"]:active, #dir-browser-select:active {
+    background: #1e1e1e;
+    box-shadow: inset 5px 5px 10px #0d0d0d, inset -5px -5px 10px #2b2b2b;
+}
+
+.browse-btn {
+    padding: .75rem 1rem;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: .75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--cyber-blue);
+}
+
+#dir-browser-select {
+    padding: .75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--cyber-blue);
+}
+
+#status-message {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 4px;
+    display: none;
+}
+
+#status-message.success {
+    background-color: var(--success-green);
+    color: var(--cloud-white);
+    display: block;
+}
+
+#status-message.error {
+    background-color: #721c24;
+    color: var(--cloud-white);
+    display: block;
+}
+
+/* Directory Browser Styles */
+#dir-browser-path {
+    margin-bottom: 1rem;
+    padding: .5rem;
+    background-color: var(--abyss-black);
+    border-radius: 4px;
+    font-family: 'Fira Code', 'JetBrains Mono', monospace;
+}
+
+#dir-browser-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    border-radius: 4px;
+}
+
+#dir-browser-list li {
+    padding: .5rem 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+#dir-browser-list li:hover {
+    background-color: #333;
+}
+
+#dir-browser-list li.selected {
+    background-color: var(--cyber-blue);
+    color: var(--abyss-black);
+}
+
+.dir-browser-actions {
+    margin-top: 1rem;
+    text-align: right;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geek's Toolbox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Geek's Toolbox</h1>
+        <p>A collection of useful tools for day-to-day tasks.</p>
+    </header>
+    <main>
+        <div class="tool-grid">
+            <div class="tool-card" id="file-extractor-card">
+                <div class="icon"><i class="fas fa-filter"></i></div>
+                <h2>File Extractor</h2>
+                <p>Extract files of a specific type from a directory.</p>
+            </div>
+            <!-- New tools will be added here -->
+        </div>
+    </main>
+
+    <!-- Modal for the File Extractor Tool -->
+    <div id="file-extractor-modal" class="modal">
+        <div class="modal-content modal-grid">
+            <div class="tool-main">
+                <span class="close-button">&times;</span>
+                <h2>File Extractor</h2>
+                <form id="extractor-form" class="tool-form">
+                    <div class="form-group">
+                        <label for="source-dir">源目录: <span class="path-note">(出于安全考虑，此处不显示完整路径)</span></label>
+                        <div class="input-group">
+                            <input type="text" id="source-dir" name="source-dir" placeholder="点击 '浏览' 选择" readonly required>
+                            <button type="button" class="browse-btn" data-target="source-dir">浏览</button>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-inline">
+                        <div class="file-type-group">
+                            <label for="file-type">文件类型 (例如 "txt", "pdf"):</label>
+                            <input type="text" id="file-type" name="file-type" list="file-types" required>
+                            <datalist id="file-types">
+                                <option value="txt"></option>
+                                <option value="jpg"></option>
+                                <option value="png"></option>
+                                <option value="pdf"></option>
+                                <option value="docx"></option>
+                                <option value="xlsx"></option>
+                            </datalist>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="keep-structure" name="keep-structure" checked>
+                            <label for="keep-structure">保留目录结构</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="dest-dir">目标目录: <span class="path-note">(出于安全考虑，此处不显示完整路径)</span></label>
+                        <div class="input-group">
+                            <input type="text" id="dest-dir" name="dest-dir" placeholder="点击 '浏览' 选择" readonly required>
+                            <button type="button" class="browse-btn" data-target="dest-dir">浏览</button>
+                        </div>
+                    </div>
+                    <button type="submit">开始提取</button>
+                </form>
+                <div id="status-message"></div>
+            </div>
+            <div class="tool-instructions">
+                <h3><i class="fas fa-info-circle"></i> 功能说明</h3>
+                <p>本工具可以帮助您从一个指定的文件夹（包括其所有子文件夹）中，批量提取特定类型的文件，并统一复制到另一个目标文件夹中。</p>
+                
+                <h4><i class="fas fa-cogs"></i> 使用方法</h4>
+                <ol>
+                    <li><strong>选择源目录</strong>: 点击“浏览”按钮，选择您要从中提取文件的根文件夹。</li>
+                    <li><strong>指定文件类型</strong>: 输入您想提取的文件的扩展名，例如 `pdf` 或 `jpg` (无需加点)。</li>
+                    <li><strong>保留目录结构 (可选)</strong>:
+                        <ul>
+                            <li><strong>勾选</strong>: 将会保持原始的文件夹层级关系，在目标目录中创建相应的子文件夹。</li>
+                            <li><strong>不勾选</strong>: 所有找到的文件都会被直接复制到目标目录的根路径下。</li>
+                        </ul>
+                    </li>
+                    <li><strong>选择目标目录</strong>: 点击“浏览”按钮，选择您希望存放提取出的文件的文件夹。</li>
+                    <li><strong>开始提取</strong>: 点击“开始提取”按钮，程序将自动完成复制。</li>
+                </ol>
+
+                <h4><i class="fas fa-shield-alt"></i> 安全与隐私</h4>
+                <p>本工具完全在您的浏览器本地运行，它使用现代浏览器API安全地访问您的本地文件系统，无需后端服务器。这意味着您的文件不会被上传到任何地方，从而确保了您的隐私安全。您可以将此工具作为静态页面托管在GitHub Pages等服务上。</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Geek's Toolbox. Ready for GitHub!</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
