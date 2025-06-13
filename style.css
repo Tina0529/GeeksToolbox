@@ -44,6 +44,12 @@ header h1 {
 
 header p {
     color: var(--mist-gray);
+    transition: color 0.3s ease;
+}
+
+header:hover h1,
+header:hover p {
+    color: var(--cyber-blue);
 }
 
 main {
@@ -88,7 +94,8 @@ main {
     transition: color 0.3s ease;
 }
 
-.tool-card:hover p {
+.tool-card:hover p,
+.tool-card:hover h2 {
     color: var(--cyber-blue);
 }
 

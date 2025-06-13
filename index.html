@@ -17,8 +17,8 @@
         <div class="tool-grid">
             <div class="tool-card" id="file-extractor-card">
                 <div class="icon">📥</div>
-                <h2>File Extractor</h2>
-                <p>Extract files of a specific type from a directory.</p>
+                <h2>文件提取工具</h2>
+                <p>从目录中提取特定类型的文件。</p>
             </div>
             <div class="tool-card" id="zip-tool-card">
                 <div class="icon">🗜️</div>
@@ -34,7 +34,7 @@
         <div class="modal-content modal-grid">
             <div class="tool-main">
                 <span class="close-button">&times;</span>
-                <h2>📥 File Extractor</h2>
+                <h2>📥 文件提取工具</h2>
                 <form id="extractor-form" class="tool-form">
                     <div class="form-group">
                         <label for="source-dir">源目录: <span class="path-note">(出于安全考虑，此处不显示完整路径)</span></label>
@@ -101,74 +101,102 @@
     </footer>
     <!-- Modal for the Batch Zip Tool -->
     <div id="zip-tool-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <div class="tab-container">
-                <div class="tab-header">
-                    <button class="tab-link active" data-tab="compress-tab">压缩</button>
-                    <button class="tab-link" data-tab="decompress-tab">解压缩</button>
+        <div class="modal-content modal-grid">
+            <div class="tool-main">
+                <span class="close-button">&times;</span>
+                <div class="tab-container">
+                    <div class="tab-header">
+                        <button class="tab-link active" data-tab="compress-tab">压缩</button>
+                        <button class="tab-link" data-tab="decompress-tab">解压缩</button>
+                    </div>
+                    <div id="compress-tab" class="tab-content active">
+                        <h2>🗜️ 压缩文件夹</h2>
+                        <form id="compress-form" class="tool-form">
+                            <div class="form-group">
+                                <label for="compress-source-dir">源目录 (包含待压缩的文件夹):</label>
+                                <div class="input-group">
+                                    <input type="text" id="compress-source-dir" placeholder="点击 '浏览' 选择" readonly required>
+                                    <button type="button" class="browse-btn" data-target="compress-source-dir">浏览</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="compress-dest-dir">目标目录 (用于保存 .zip 文件):</label>
+                                <div class="input-group">
+                                    <input type="text" id="compress-dest-dir" placeholder="点击 '浏览' 选择" readonly required>
+                                    <button type="button" class="browse-btn" data-target="compress-dest-dir">浏览</button>
+                                </div>
+                            </div>
+                            <p class="path-note">注意：文件夹将以 .zip 格式进行压缩。</p>
+                            <button type="submit">开始压缩</button>
+                        </form>
+                    </div>
+                    <div id="decompress-tab" class="tab-content">
+                        <h2>📂 解压文件</h2>
+                        <form id="decompress-form" class="tool-form">
+                            <div class="form-group">
+                                <label for="decompress-source-dir">源目录 (包含 .zip 文件):</label>
+                                <div class="input-group">
+                                    <input type="text" id="decompress-source-dir" placeholder="点击 '浏览' 选择" readonly required>
+                                    <button type="button" class="browse-btn" data-target="decompress-source-dir">浏览</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="recursive-decompress" name="recursive-decompress">
+                                    <label for="recursive-decompress">在子目录中搜索 .zip 文件</label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="decompress-in-place" name="decompress-in-place" checked>
+                                    <label for="decompress-in-place">解压到与 zip 文件相同的目录</label>
+                                </div>
+                            </div>
+                            <div class="form-group" id="decompress-dest-dir-group">
+                                <label for="decompress-dest-dir">目标目录:</label>
+                                <div class="input-group">
+                                    <input type="text" id="decompress-dest-dir" placeholder="点击 '浏览' 选择" readonly>
+                                    <button type="button" class="browse-btn" data-target="decompress-dest-dir">浏览</button>
+                                </div>
+                            </div>
+                            <p class="path-note">注意：目前仅支持解压 .zip 格式的文件。</p>
+                            <button type="submit">开始解压</button>
+                        </form>
+                    </div>
                 </div>
-                <div id="compress-tab" class="tab-content active">
-                    <h2>🗜️ 压缩文件夹</h2>
-                    <form id="compress-form" class="tool-form">
-                        <div class="form-group">
-                            <label for="compress-source-dir">源目录 (包含待压缩的文件夹):</label>
-                            <div class="input-group">
-                                <input type="text" id="compress-source-dir" placeholder="点击 '浏览' 选择" readonly required>
-                                <button type="button" class="browse-btn" data-target="compress-source-dir">浏览</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="compress-dest-dir">目标目录 (用于保存 .zip 文件):</label>
-                            <div class="input-group">
-                                <input type="text" id="compress-dest-dir" placeholder="点击 '浏览' 选择" readonly required>
-                                <button type="button" class="browse-btn" data-target="compress-dest-dir">浏览</button>
-                            </div>
-                        </div>
-                        <p class="path-note">注意：文件夹将以 .zip 格式进行压缩。</p>
-                        <button type="submit">开始压缩</button>
-                    </form>
-                </div>
-                <div id="decompress-tab" class="tab-content">
-                    <h2>📂 解压文件</h2>
-                    <form id="decompress-form" class="tool-form">
-                        <div class="form-group">
-                            <label for="decompress-source-dir">源目录 (包含 .zip 文件):</label>
-                            <div class="input-group">
-                                <input type="text" id="decompress-source-dir" placeholder="点击 '浏览' 选择" readonly required>
-                                <button type="button" class="browse-btn" data-target="decompress-source-dir">浏览</button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="recursive-decompress" name="recursive-decompress">
-                                <label for="recursive-decompress">在子目录中搜索 .zip 文件</label>
-                            </div>
-                            <div class="checkbox-group">
-                                <input type="checkbox" id="decompress-in-place" name="decompress-in-place" checked>
-                                <label for="decompress-in-place">解压到与 zip 文件相同的目录</label>
-                            </div>
-                        </div>
-                        <div class="form-group" id="decompress-dest-dir-group">
-                            <label for="decompress-dest-dir">目标目录:</label>
-                            <div class="input-group">
-                                <input type="text" id="decompress-dest-dir" placeholder="点击 '浏览' 选择" readonly>
-                                <button type="button" class="browse-btn" data-target="decompress-dest-dir">浏览</button>
-                            </div>
-                        </div>
-                        <p class="path-note">注意：目前仅支持解压 .zip 格式的文件。</p>
-                        <button type="submit">开始解压</button>
-                    </form>
+                <div id="zip-status-container">
+                    <h3>处理队列</h3>
+                    <div id="zip-progress-queue"></div>
                 </div>
             </div>
-            <div id="zip-status-container">
-                <h3>处理队列</h3>
-                <div id="zip-progress-queue"></div>
+            <div class="tool-instructions">
+                <h3><i class="fas fa-info-circle"></i> 功能说明</h3>
+                <p>本工具提供批量压缩与解压功能，所有操作均在您的本地浏览器中完成，确保文件安全。</p>
+                
+                <h4><i class="fas fa-cogs"></i> 压缩功能</h4>
+                <ol>
+                    <li><strong>选择源目录</strong>: 选择一个包含多个待压缩子文件夹的根目录。工具会为该根目录下的每一个子文件夹创建一个独立的 .zip 压缩包。</li>
+                    <li><strong>选择目标目录</strong>: 选择一个用于存放所有生成的 .zip 文件的位置。</li>
+                    <li><strong>开始压缩</strong>: 点击按钮，工具将开始处理。请注意，根目录下的独立文件将被忽略。</li>
+                </ol>
+
+                <h4><i class="fas fa-cogs"></i> 解压功能</h4>
+                <ol>
+                    <li><strong>选择源目录</strong>: 选择一个包含 .zip 文件的目录。</li>
+                    <li><strong>在子目录中搜索 (可选)</strong>: 勾选此项，工具会递归查找并解压所有子文件夹中的 .zip 文件。</li>
+                    <li><strong>解压到相同目录 (可选)</strong>:
+                        <ul>
+                            <li><strong>勾选 (默认)</strong>: 每个 .zip 文件将被解压到其所在的相同文件夹内的一个新文件夹中。</li>
+                            <li><strong>不勾选</strong>: 您需要指定一个统一的目标目录，所有 .zip 文件都将被解压到该位置。</li>
+                        </ul>
+                    </li>
+                </ol>
+
+                <h4><i class="fas fa-shield-alt"></i> 性能与安全</h4>
+                <p>为了防止浏览器卡顿，工具会以最多3个任务并行的方式处理您的文件队列。您的文件不会被上传到任何服务器，确保了隐私安全。</p>
             </div>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
