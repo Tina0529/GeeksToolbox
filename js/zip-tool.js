@@ -7,7 +7,7 @@ export function initializeZipTool() {
     const decompressDestDirGroup = document.getElementById('decompress-dest-dir-group');
     const zipProgressQueue = document.getElementById('zip-progress-queue');
 
-    const MAX_CONCURRENT_TASKS = 3;
+    const MAX_CONCURRENT_TASKS = 1;
     let activeTasks = 0;
     const taskQueue = [];
     let uiUpdateScheduled = false;
@@ -221,7 +221,17 @@ export function initializeZipTool() {
 
     async function decompressFile(fileHandle, destHandle, task) {
         const file = await fileHandle.getFile();
-        const zip = await JSZip.loadAsync(file);
+        const zip = await JSZip.loadAsync(file, {
+            decodeFileName: function(bytes) {
+                try {
+                    // Try UTF-8 first, as it's the modern standard.
+                    return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+                } catch (e) {
+                    // If UTF-8 decoding fails, fall back to Shift_JIS for Japanese filenames.
+                    return new TextDecoder('shift-jis').decode(bytes);
+                }
+            }
+        });
         
         const fileEntries = Object.values(zip.files).filter(entry => !entry.dir);
         task.totalFiles = fileEntries.length;
